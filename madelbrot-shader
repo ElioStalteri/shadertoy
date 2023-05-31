@@ -32,19 +32,20 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     // Normalized pixel coordinates (from 0 to 1)
     vec2 uv = fragCoord/iResolution.xy - 0.5;
     
+    
     vec2 ms = iMouse.xy/iResolution.xy - 0.5;
     
     ms.x = ms.x * iResolution.x / iResolution.y;
     uv.x = uv.x * iResolution.x / iResolution.y;
     
+    
+    // uv = uv * iMouse.z/400.0;
+    
     uv = uv - ms;
-    
-    
-    uv = uv * 2.0;
 
     int mdb = Mandelbrot(uv);
     
-    vec3 norm = vec3(1.0) * ( 1.0 - ( sqrt( float(mdb) / float(iter) ) ) );
+    vec3 norm = vec3(1.0) * (1.0 - float(mdb) / float(iter));
      
 
     // Time varying pixel color
